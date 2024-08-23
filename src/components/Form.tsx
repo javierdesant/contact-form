@@ -1,14 +1,11 @@
-import { FunctionComponent } from "react"
+import { FunctionComponent, useState } from "react"
 import { DevTool } from "@hookform/devtools"
 import { FieldErrors, useForm } from "react-hook-form"
+import SuccessPopUp from "./SuccessPopUp"
 
-interface FormProps {
-    
-}
+interface FormProps {}
 
-let renderCount = 0 // TEST
-
-interface FormValues {  // TODO: Add missing fields
+interface FormValues {
     name: {
         last: string
         first: string
@@ -33,27 +30,31 @@ const Form: FunctionComponent<FormProps> = () => {
             consent: false
         }
     })
-    const { register, control, handleSubmit, formState, setValue, getValues } = form
+
+    const { register, control, handleSubmit, formState } = form
     const { errors } = formState
 
-    const onSubmit = (data: FormValues) => {
-        console.log("Form submitted", data) // TODO: Make component to display message
+    const [showSuccess, setShowSuccess] = useState(false)
+
+    const onSubmit = () => {
+        setShowSuccess(true)
+        setTimeout(() => setShowSuccess(false), 3000)
     }
 
     const onError = (errors: FieldErrors<FormValues>) => {
-        console.log("Errors", errors)   // TEST
+        errors.name?.first?.message && console.log("First Name Error", errors.name.first.message)   // TEST
+        errors.name?.last?.message && console.log("Last Name Error", errors.name.last.message)      // TEST
+        errors.email?.message && console.log("Email Error", errors.email.message)                   // TEST
+        errors.query?.message && console.log("Query Error", errors.query.message)                   // TEST
+        errors.formMessage?.message && console.log("Message Error", errors.formMessage.message)     // TEST
     }
 
-    const handleSetValue = () => {
-        setValue("consent", !getValues("consent"))
-    }
-
-    renderCount++; // TEST
     return ( 
     <>
-        <p>Render count: {renderCount/2}</p> {/* TEST */}
+        {showSuccess && <SuccessPopUp />}
+
         <form 
-            className="w-full md:max-w-[800px] max-w-[345px] px-10 py-5 text-gray-900 font-karla bg-white rounded-xl shadow"
+            className="w-full md:max-w-[800px] max-w-[345px] px-10 py-5 text-neutral-darker-grey font-karla bg-white rounded-xl shadow"
             onSubmit={handleSubmit(onSubmit, onError)}
             noValidate
         >
@@ -70,7 +71,7 @@ const Form: FunctionComponent<FormProps> = () => {
                             { required: "This field is required" }
                         )}
                     />
-                    <span className="text-sm text-red-500">{errors.name?.first?.message}</span>
+                    <span className="text-sm text-primary-red">{errors.name?.first?.message}</span>
                 </div>
 
                 <div className="flex grow flex-col col-span-2 md:col-span-1 space-y-2">
@@ -83,7 +84,7 @@ const Form: FunctionComponent<FormProps> = () => {
                             { required: "This field is required" }
                         )}
                     />
-                    <span className="text-sm text-red-500">{errors.name?.last?.message}</span>
+                    <span className="text-sm text-primary-red">{errors.name?.last?.message}</span>
                 </div>
 
                 <div className="flex grow flex-col col-span-2 space-y-2">
@@ -101,7 +102,7 @@ const Form: FunctionComponent<FormProps> = () => {
                              }
                         )}
                     />
-                    <span className="text-sm text-red-500">{errors.email?.message}</span>
+                    <span className="text-sm text-primary-red">{errors.email?.message}</span>
                 </div>
 
                 <div className="flex grow flex-col row-span-2 col-span-2 md:row-span-1 space-y-2">
@@ -130,7 +131,7 @@ const Form: FunctionComponent<FormProps> = () => {
                             <label htmlFor="support-request" className="text-sm">Support Request</label>
                         </div>
                     </div>
-                    <span className="text-sm text-red-500">{errors.query?.message}</span>
+                    <span className="text-sm text-primary-red">{errors.query?.message}</span>
                 </div>
 
                 <div className="flex grow flex-col col-span-2 row-span-3 md:row-span-2 space-y-2">
@@ -143,7 +144,7 @@ const Form: FunctionComponent<FormProps> = () => {
                             { required: "This field is required" }
                         )}
                     />
-                    <span className="text-sm text-red-500">{errors.formMessage?.message}</span>
+                    <span className="text-sm text-primary-red">{errors.formMessage?.message}</span>
                 </div>
 
                 <div className="flex flex-col grow col-span-2">
@@ -158,13 +159,12 @@ const Form: FunctionComponent<FormProps> = () => {
                             />
                         <label htmlFor="consent" className="text-sm">I consent to being contacted by the team<span className=" text-emerald-700">&nbsp;&nbsp;*</span></label>
                     </div>
-                    <span className="text-sm col-span-2 text-red-500 my-2">{errors.consent?.message}</span>
+                    <span className="text-sm col-span-2 text-primary-red my-2">{errors.consent?.message}</span>
                 </div>
 
                 <div className="flex grow h-min col-span-2 mt-4">
-                    <button type="submit" className="flex grow items-center justify-center p-4 font-bold bg-emerald-700 text-white rounded-lg">Submit</button>
-                        {/* Message Sent!
-                            Thanks for completing the form. We'll be in touch soon!  */}
+                    <button 
+                        type="submit" className="flex grow items-center justify-center p-4 font-bold bg-primary-medium-green text-white rounded-lg">Submit</button>
                 </div>
             </div>
         </form>
