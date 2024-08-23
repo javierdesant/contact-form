@@ -2,6 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  body {
+    font-family: 'Karla', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #333;
+  }
+
+  [type='text'],
+  [type='email'],
+  [type='url'],
+  [type='password'],
+  [type='number'],
+  [type='date'],
+  [type='datetime-local'],
+  [type='month'],
+  [type='search'],
+  [type='tel'],
+  [type='time'],
+  [type='week'],
+  [multiple],
+  select {
+    @apply w-full border border-neutral-darker-grey hover:border-primary-medium-green 
+    focus:border-primary-medium-green focus:ring-primary-medium-green rounded-md
+  }
+
+  textarea {
+    @apply w-full h-full border border-neutral-darker-grey hover:border-primary-medium-green 
+    focus:border-primary-medium-green focus:ring-primary-medium-green rounded-md
+  }
+
+  [type='checkbox'],
+  [type='radio'] {
+    @apply text-primary-medium-green focus:border-primary-medium-green focus:ring-primary-medium-green
+  }
+}
+
 @layer components {
   .attribution {
       font-size: 11px; 
