@@ -53,14 +53,14 @@ const Form: FunctionComponent<FormProps> = () => {
         {showSuccess && <SuccessPopUp />}
 
         <form 
-            className="w-full md:max-w-[800px] max-w-[345px] px-10 py-5 text-neutral-darker-grey bg-white rounded-xl shadow"
+            className="w-full md:max-w-[600px] max-w-[345px] px-10 py-5 text-neutral-darker-grey bg-white rounded-xl shadow"
             onSubmit={handleSubmit(onSubmit, onError)}
             noValidate
         >
             <h1 className="text-3xl font-bold m-4 ml-0">Contact Us</h1>
 
-            <div className="grid grid-flow-row grid-rows-8 md:grid-rows-5 grid-cols-2 gap-5">
-                <div className="flex grow flex-col col-span-2 md:col-span-1 space-y-2">
+            <div className="flex flex-wrap gap-5">
+                <div className="flex basis-full md:basis-[48%] flex-col space-y-2">
                     <label htmlFor="first-name" className="text-sm">First Name<span className=" text-primary-medium-green">&nbsp;&nbsp;*</span></label>
                     <input
                         id="first-name"
@@ -73,7 +73,7 @@ const Form: FunctionComponent<FormProps> = () => {
                     <span className="text-sm text-primary-red">{errors.name?.first?.message}</span>
                 </div>
 
-                <div className="flex grow flex-col col-span-2 md:col-span-1 space-y-2">
+                <div className="flex basis-full md:basis-[48%] flex-col space-y-2">
                     <label htmlFor="last-name" className="text-sm">Last Name<span className=" text-primary-medium-green">&nbsp;&nbsp;*</span></label>
                     <input
                         id="last-name"
@@ -86,7 +86,7 @@ const Form: FunctionComponent<FormProps> = () => {
                     <span className="text-sm text-primary-red">{errors.name?.last?.message}</span>
                 </div>
 
-                <div className="flex grow flex-col col-span-2 space-y-2">
+                <div className="flex basis-full flex-col space-y-2">
                     <label htmlFor="email" className="text-sm">Email Address<span className=" text-primary-medium-green">&nbsp;&nbsp;*</span></label>
                     <input
                         id="email"
@@ -106,7 +106,7 @@ const Form: FunctionComponent<FormProps> = () => {
 
 
                  {/* FIXME */}
-                <div className="flex grow flex-col row-span-2 col-span-2 md:row-span-1 space-y-2">
+                 <div className="flex basis-full flex-col space-y-2">
                     <span className="text-sm">Query Type<span className=" text-primary-medium-green">&nbsp;&nbsp;*</span></span>
                     <div className="flex flex-col md:flex-row grow gap-y-5 md:gap-x-5 md:gap-y-0">
                         <div className="flex grow items-center border border-neutral-darker-grey 
@@ -139,11 +139,11 @@ const Form: FunctionComponent<FormProps> = () => {
 
                 
 
-                <div className="flex grow flex-col col-span-2 row-span-3 md:row-span-2 space-y-2">
+                <div className="flex basis-full flex-col space-y-2">
                     <label htmlFor="formMessage" className="text-sm">Message<span className=" text-primary-medium-green">&nbsp;&nbsp;*</span></label>
                     <textarea
                         id="formMessage"
-                        className={`${errors.formMessage ? 'border-primary-red' : ''}`}
+                        className={`h-32 ${errors.formMessage ? 'border-primary-red' : ''}`}
                         {...register("formMessage", 
                             { required: "This field is required" }
                         )}
@@ -151,7 +151,7 @@ const Form: FunctionComponent<FormProps> = () => {
                     <span className="text-sm text-primary-red">{errors.formMessage?.message}</span>
                 </div>
 
-                <div className="flex flex-col grow col-span-2">
+                <div className="flex flex-col basis-full">
                     <div className="flex items-center">
                         <input
                             id="consent"
@@ -165,7 +165,7 @@ const Form: FunctionComponent<FormProps> = () => {
                     <span className="text-sm col-span-2 text-primary-red my-2">{errors.consent?.message}</span>
                 </div>
 
-                <div className="flex grow h-min col-span-2 mt-4">
+                <div className="flex basis-full">
                     <button 
                         type="submit" // FIXME: Add a focus style
                         className="flex grow items-center justify-center p-4 font-bold bg-primary-medium-green text-white rounded-lg" 
