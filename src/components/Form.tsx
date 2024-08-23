@@ -1,5 +1,4 @@
 import { FunctionComponent, useState } from "react"
-import { DevTool } from "@hookform/devtools"
 import { FieldErrors, useForm } from "react-hook-form"
 import SuccessPopUp from "./SuccessPopUp"
 
@@ -31,7 +30,7 @@ const Form: FunctionComponent<FormProps> = () => {
         }
     })
 
-    const { register, control, handleSubmit, formState } = form
+    const { register, handleSubmit, formState } = form
     const { errors } = formState
 
     const [showSuccess, setShowSuccess] = useState(false)
@@ -62,11 +61,12 @@ const Form: FunctionComponent<FormProps> = () => {
 
             <div className="grid grid-flow-row grid-rows-8 md:grid-rows-5 grid-cols-2 gap-5">
                 <div className="flex grow flex-col col-span-2 md:col-span-1 space-y-2">
-                    <label htmlFor="first-name" className="text-sm">First Name<span className=" text-emerald-700">&nbsp;&nbsp;*</span></label>
+                    <label htmlFor="first-name" className="text-sm">First Name<span className=" text-primary-medium-green">&nbsp;&nbsp;*</span></label>
                     <input
                         id="first-name"
                         type="text"
-                        className={`flex grow border ${errors.name?.first ? 'border-red-500' : 'border-gray-500'} p-2 rounded-md`}
+                        className={`flex grow border ${errors.name?.first ? 'border-primary-red' : 'border-neutral-darker-grey'} 
+                            hover:border-primary-medium-green focus:outline focus:outline-2 focus:outline-primary-medium-green focus:border-primary-medium-green p-2 rounded-md`}
                         {...register("name.first", 
                             { required: "This field is required" }
                         )}
@@ -75,11 +75,12 @@ const Form: FunctionComponent<FormProps> = () => {
                 </div>
 
                 <div className="flex grow flex-col col-span-2 md:col-span-1 space-y-2">
-                    <label htmlFor="last-name" className="text-sm">Last Name<span className=" text-emerald-700">&nbsp;&nbsp;*</span></label>
+                    <label htmlFor="last-name" className="text-sm">Last Name<span className=" text-primary-medium-green">&nbsp;&nbsp;*</span></label>
                     <input
                         id="last-name"
                         type="text"
-                        className={`flex grow border ${errors.name?.last ? 'border-red-500' : 'border-gray-500'} p-2 rounded-md`}
+                        className={`flex grow border ${errors.name?.last ? 'border-primary-red' : 'border-neutral-darker-grey'} 
+                            hover:border-primary-medium-green focus:outline focus:outline-2 focus:outline-primary-medium-green focus:border-primary-medium-green p-2 rounded-md`}
                         {...register("name.last",
                             { required: "This field is required" }
                         )}
@@ -88,11 +89,12 @@ const Form: FunctionComponent<FormProps> = () => {
                 </div>
 
                 <div className="flex grow flex-col col-span-2 space-y-2">
-                    <label htmlFor="email" className="text-sm">Email Address<span className=" text-emerald-700">&nbsp;&nbsp;*</span></label>
+                    <label htmlFor="email" className="text-sm">Email Address<span className=" text-primary-medium-green">&nbsp;&nbsp;*</span></label>
                     <input
                         id="email"
                         type="email"
-                        className={`flex grow border ${errors.email ? 'border-red-500' : 'border-gray-500'} p-2 rounded-md`}
+                        className={`flex grow border ${errors.email ? 'border-primary-red' : 'border-neutral-darker-grey'} 
+                            hover:border-primary-medium-green focus:outline focus:outline-2 focus:outline-primary-medium-green focus:border-primary-medium-green p-2 rounded-md`}
                         {...register("email",
                             { required: "This field is required",
                                 pattern: {
@@ -106,9 +108,9 @@ const Form: FunctionComponent<FormProps> = () => {
                 </div>
 
                 <div className="flex grow flex-col row-span-2 col-span-2 md:row-span-1 space-y-2">
-                    <span className="text-sm">Query Type<span className=" text-emerald-700">&nbsp;&nbsp;*</span></span>
+                    <span className="text-sm">Query Type<span className=" text-primary-medium-green">&nbsp;&nbsp;*</span></span>
                     <div className="flex flex-col md:flex-row grow gap-y-5 md:gap-x-5 md:gap-y-0">
-                        <div className="flex grow items-center border border-gray-500 p-2 rounded-md">
+                        <div className="flex grow items-center border border-neutral-darker-grey hover:border-primary-medium-green focus:border-primary-medium-green p-2 rounded-md"> {/* FIXME */}
                             <input 
                                 id="general-enquiry"
                                 type="radio" 
@@ -119,7 +121,7 @@ const Form: FunctionComponent<FormProps> = () => {
                             />
                             <label htmlFor="general-enquiry" className="text-sm">General Enquiry</label>
                         </div>
-                        <div className="flex grow items-center border border-gray-500 p-2 rounded-md">
+                        <div className="flex grow items-center border border-neutral-darker-grey hover:border-primary-medium-green focus:border-primary-medium-green p-2 rounded-md"> {/* FIXME */}
                             <input 
                                 id="support-request"
                                 type="radio" 
@@ -135,11 +137,11 @@ const Form: FunctionComponent<FormProps> = () => {
                 </div>
 
                 <div className="flex grow flex-col col-span-2 row-span-3 md:row-span-2 space-y-2">
-                    <label htmlFor="formMessage" className="text-sm">Message<span className=" text-emerald-700">&nbsp;&nbsp;*</span></label>
-                    <input
+                    <label htmlFor="formMessage" className="text-sm">Message<span className=" text-primary-medium-green">&nbsp;&nbsp;*</span></label>
+                    <textarea
                         id="formMessage"
-                        type="text"
-                        className={`flex grow border ${errors.formMessage ? 'border-red-500' : 'border-gray-500'} p-2 rounded-md`}
+                        className={`flex grow border ${errors.formMessage ? 'border-primary-red' : 'border-neutral-darker-grey'} 
+                            hover:border-primary-medium-green focus:outline focus:outline-2 focus:outline-primary-medium-green focus:border-primary-medium-green p-2 rounded-md`}
                         {...register("formMessage", 
                             { required: "This field is required" }
                         )}
@@ -152,12 +154,12 @@ const Form: FunctionComponent<FormProps> = () => {
                         <input
                             id="consent"
                             type="checkbox"
-                            className="flex grow-0 mr-4 border border-gray-500 p-2 rounded-md"
+                            className="flex grow-0 mr-4 border border-neutral-darker-grey p-2 rounded-md"
                             {...register("consent", 
                                 { required: "To submit this form, please consent to being contacted" }
                             )}
                             />
-                        <label htmlFor="consent" className="text-sm">I consent to being contacted by the team<span className=" text-emerald-700">&nbsp;&nbsp;*</span></label>
+                        <label htmlFor="consent" className="text-sm">I consent to being contacted by the team<span className=" text-primary-medium-green">&nbsp;&nbsp;*</span></label>
                     </div>
                     <span className="text-sm col-span-2 text-primary-red my-2">{errors.consent?.message}</span>
                 </div>
@@ -168,8 +170,6 @@ const Form: FunctionComponent<FormProps> = () => {
                 </div>
             </div>
         </form>
-
-        <DevTool control={control}/>
     </>
     );
 }
