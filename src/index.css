@@ -36,7 +36,7 @@
 
   [type='checkbox'],
   [type='radio'] {
-    @apply text-primary-medium-green focus:border-primary-medium-green focus:ring-primary-medium-green
+    @apply text-primary-medium-green focus:border-primary-medium-green focus:ring-primary-medium-green cursor-pointer
   }
 }
 
