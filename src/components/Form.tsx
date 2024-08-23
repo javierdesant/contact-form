@@ -41,11 +41,11 @@ const Form: FunctionComponent<FormProps> = () => {
     }
 
     const onError = (errors: FieldErrors<FormValues>) => {
-        errors.name?.first?.message && console.log("First Name Error", errors.name.first.message)   // TEST
-        errors.name?.last?.message && console.log("Last Name Error", errors.name.last.message)      // TEST
-        errors.email?.message && console.log("Email Error", errors.email.message)                   // TEST
-        errors.query?.message && console.log("Query Error", errors.query.message)                   // TEST
-        errors.formMessage?.message && console.log("Message Error", errors.formMessage.message)     // TEST
+        errors.name?.first?.message && console.log("First Name Error", errors.name.first.message)   
+        errors.name?.last?.message && console.log("Last Name Error", errors.name.last.message)      
+        errors.email?.message && console.log("Email Error", errors.email.message)                   
+        errors.query?.message && console.log("Query Error", errors.query.message)                   
+        errors.formMessage?.message && console.log("Message Error", errors.formMessage.message)     
     }
 
     return ( 
@@ -53,14 +53,14 @@ const Form: FunctionComponent<FormProps> = () => {
         {showSuccess && <SuccessPopUp />}
 
         <form 
-            className="w-full md:max-w-[800px] max-w-[345px] px-10 py-5 text-neutral-darker-grey bg-white rounded-xl shadow"
+            className="w-full md:max-w-[600px] max-w-[345px] px-10 py-5 text-neutral-darker-grey bg-white rounded-xl shadow"
             onSubmit={handleSubmit(onSubmit, onError)}
             noValidate
         >
             <h1 className="text-3xl font-bold m-4 ml-0">Contact Us</h1>
 
-            <div className="grid grid-flow-row grid-rows-8 md:grid-rows-5 grid-cols-2 gap-5">
-                <div className="flex grow flex-col col-span-2 md:col-span-1 space-y-2">
+            <div className="flex flex-wrap gap-5">
+                <div className="flex basis-full md:basis-[48%] flex-col space-y-2">
                     <label htmlFor="first-name" className="text-sm">First Name<span className=" text-primary-medium-green">&nbsp;&nbsp;*</span></label>
                     <input
                         id="first-name"
@@ -73,7 +73,7 @@ const Form: FunctionComponent<FormProps> = () => {
                     <span className="text-sm text-primary-red">{errors.name?.first?.message}</span>
                 </div>
 
-                <div className="flex grow flex-col col-span-2 md:col-span-1 space-y-2">
+                <div className="flex basis-full md:basis-[48%] flex-col space-y-2">
                     <label htmlFor="last-name" className="text-sm">Last Name<span className=" text-primary-medium-green">&nbsp;&nbsp;*</span></label>
                     <input
                         id="last-name"
@@ -86,7 +86,7 @@ const Form: FunctionComponent<FormProps> = () => {
                     <span className="text-sm text-primary-red">{errors.name?.last?.message}</span>
                 </div>
 
-                <div className="flex grow flex-col col-span-2 space-y-2">
+                <div className="flex basis-full flex-col space-y-2">
                     <label htmlFor="email" className="text-sm">Email Address<span className=" text-primary-medium-green">&nbsp;&nbsp;*</span></label>
                     <input
                         id="email"
@@ -104,46 +104,42 @@ const Form: FunctionComponent<FormProps> = () => {
                     <span className="text-sm text-primary-red">{errors.email?.message}</span>
                 </div>
 
-
-                 {/* FIXME */}
-                <div className="flex grow flex-col row-span-2 col-span-2 md:row-span-1 space-y-2">
+                <div className="flex basis-full flex-col space-y-2">
                     <span className="text-sm">Query Type<span className=" text-primary-medium-green">&nbsp;&nbsp;*</span></span>
                     <div className="flex flex-col md:flex-row grow gap-y-5 md:gap-x-5 md:gap-y-0">
-                        <div className="flex grow items-center border border-neutral-darker-grey 
-                            hover:border-primary-medium-green focus:border-primary-medium-green p-2 rounded-md">
+                        <div className="flex grow items-center py-3 border border-neutral-darker-grey 
+                            hover:border-primary-medium-green focus:border-primary-medium-green p-2 rounded-md cursor-pointer
+                            has-[:checked]:bg-primary-lighter-green"
+                        >
                             <input 
                                 id="general-enquiry"
                                 type="radio" 
                                 className="flex grow-0 items-center text-base mx-4"
-                                {...register("query",
-                                    { required: "Please select a query type" }
-                                )}
+                                {...register("query", { required: "Please select a query type" })}
                             />
-                            <label htmlFor="general-enquiry" className="text-sm">General Enquiry</label>
+                            <label htmlFor="general-enquiry" className="text-sm cursor-pointer">General Enquiry</label>
                         </div>
-                        <div className="flex grow items-center border border-neutral-darker-grey 
-                            hover:border-primary-medium-green focus:border-primary-medium-green p-2 rounded-md">
+                        <div className="flex grow items-center py-3 border border-neutral-darker-grey 
+                            hover:border-primary-medium-green focus:border-primary-medium-green p-2 rounded-md cursor-pointer
+                            has-[:checked]:bg-primary-lighter-green"
+                        >
                             <input 
                                 id="support-request"
                                 type="radio" 
-                                className="flex grow-0 items-center text-base mx-4"
-                                {...register("query",
-                                    { required: "Please select a query type" }
-                                )}
+                                className="flex grow-0 group items-center text-base mx-4"
+                                {...register("query", { required: "Please select a query type" })}
                             />
-                            <label htmlFor="support-request" className="text-sm">Support Request</label>
+                            <label htmlFor="support-request" className="text-sm cursor-pointer">Support Request</label>
                         </div>
                     </div>
                     <span className="text-sm text-primary-red">{errors.query?.message}</span>
                 </div>
 
-                
-
-                <div className="flex grow flex-col col-span-2 row-span-3 md:row-span-2 space-y-2">
+                <div className="flex basis-full flex-col space-y-2">
                     <label htmlFor="formMessage" className="text-sm">Message<span className=" text-primary-medium-green">&nbsp;&nbsp;*</span></label>
                     <textarea
                         id="formMessage"
-                        className={`${errors.formMessage ? 'border-primary-red' : ''}`}
+                        className={`h-32 ${errors.formMessage ? 'border-primary-red' : ''}`}
                         {...register("formMessage", 
                             { required: "This field is required" }
                         )}
@@ -151,7 +147,7 @@ const Form: FunctionComponent<FormProps> = () => {
                     <span className="text-sm text-primary-red">{errors.formMessage?.message}</span>
                 </div>
 
-                <div className="flex flex-col grow col-span-2">
+                <div className="flex flex-col basis-full">
                     <div className="flex items-center">
                         <input
                             id="consent"
@@ -160,15 +156,16 @@ const Form: FunctionComponent<FormProps> = () => {
                                 { required: "To submit this form, please consent to being contacted" }
                             )}
                             />
-                        <label htmlFor="consent" className="ml-4 text-sm">I consent to being contacted by the team<span className=" text-primary-medium-green">&nbsp;&nbsp;*</span></label>
+                        <label htmlFor="consent" className="ml-4 cursor-pointer text-sm">I consent to being contacted by the team<span className=" text-primary-medium-green">&nbsp;&nbsp;*</span></label>
                     </div>
                     <span className="text-sm col-span-2 text-primary-red my-2">{errors.consent?.message}</span>
                 </div>
 
-                <div className="flex grow h-min col-span-2 mt-4">
+                <div className="flex basis-full">
                     <button 
-                        type="submit" // FIXME: Add a focus style
-                        className="flex grow items-center justify-center p-4 font-bold bg-primary-medium-green text-white rounded-lg" 
+                        type="submit"
+                        className="flex grow items-center justify-center p-4 font-bold bg-primary-medium-green text-white rounded-lg 
+                            focus:outline-none focus:ring-2 focus:ring-primary-medium-green focus:ring-offset-2" 
                         >Submit</button>
                 </div>
             </div>
